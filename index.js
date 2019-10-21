@@ -13,6 +13,7 @@ app.get("/results", (req, res) => {
         if(!error && response.statusCode == 200) {
             let results = JSON.parse(body);
             res.send(results);
+            res.render("results");
         }
     });
 });
