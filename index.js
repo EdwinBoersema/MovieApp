@@ -9,11 +9,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/results", (req, res) => {
-    request("http://omdbapi.com/?s=Inception&apikey=thewdb", (error, response, body) => {
+    let query = req.query.search;
+    let url = "http://omdbapi.com/?s=";
+    let key = "&apikey=thewdb";
+    request(url + query + key, (error, response, body) => {
         if(!error && response.statusCode == 200) {
-            let results = JSON.parse(body);
-            res.send(results);
-            res.render("results");
+            let data = JSON.parse(body);
+            res.render("results", {data: data});
         }
     });
 });
